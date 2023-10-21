@@ -28,7 +28,25 @@ def Create_Point_List():
 
 def Point_axes(point_list):
     """Return point list with x and y value"""
+    x = 0
+    y = 250
 
+    point_list[0].x, point_list[0].y = x, y
+
+    for i in range(1, len(point_list)):
+        if ((i <= 3) or(i >= 10)):
+            x += 40
+            point_list[i].x = x
+        else :
+            x -= 40
+            point_list[i].x = x
+        if (i <= 6):
+            y -= 20
+            point_list[i].y = y
+        else:
+            y += 20
+            point_list[i].y = y
+    return point_list
 
 
 #def loading_bar_points():
@@ -36,6 +54,14 @@ def Point_axes(point_list):
 window = window_configu()
 turtle.hideturtle()
 pen = turtle.Turtle()
+pen.penup()
+##test
+point_list = Point_axes(Create_Point_List())
+for p in point_list:
+    Point.Draw_Point(p)
+
+##test
+
 turtle.penup()
-Point.Draw_Point(Point(30, "red", 0, 50 ))
 turtle.done()
+
