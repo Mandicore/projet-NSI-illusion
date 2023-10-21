@@ -1,4 +1,5 @@
 import turtle
+import math
 
 NB_POINT = 12
 
@@ -23,33 +24,23 @@ def Create_Point_List():
     """Create a point list without value for x and y"""
     point_list = []
     for i in range(NB_POINT):
-        point_list.append(Point(10, "red"))
+        point_list.append(Point(50, "red"))
     return point_list
 
 def Point_axes(point_list):
-    """Return point list with x and y value"""
-    x = 0
-    y = 250
+    num_points = len(point_list)
+    radius = 150
+    center = 0
 
-    point_list[0].x, point_list[0].y = x, y
+    # Calcule l'angle entre chaque point
+    angle_step = 360 / num_points
 
-    for i in range(1, len(point_list)):
-        if ((i <= 3) or(i >= 10)):
-            x += 40
-            point_list[i].x = x
-        else :
-            x -= 40
-            point_list[i].x = x
-        if (i <= 6):
-            y -= 20
-            point_list[i].y = y
-        else:
-            y += 20
-            point_list[i].y = y
+    for i in range(num_points):
+        angle_degrees = i * angle_step
+        angle_radians = math.radians(angle_degrees)
+        point_list[i].x = center + radius * math.cos(angle_radians)
+        point_list[i].y = center + radius * math.sin(angle_radians)
     return point_list
-
-
-#def loading_bar_points():
 
 window = window_configu()
 turtle.hideturtle()
