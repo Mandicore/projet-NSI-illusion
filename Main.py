@@ -28,30 +28,30 @@ def Create_Point_List():
     return point_list
 
 def Point_axes(point_list):
-    num_points = len(point_list)
+    """def point position of all point of point_list"""
     radius = 150
     center = 0
 
-    # Calcule l'angle entre chaque point
-    angle_step = 360 / num_points
+    angle_step = 360 / NB_POINT
 
-    for i in range(num_points):
+    for i in range(NB_POINT):
         angle_degrees = i * angle_step
         angle_radians = math.radians(angle_degrees)
         point_list[i].x = center + radius * math.cos(angle_radians)
-        point_list[i].y = center + radius * math.sin(angle_radians)
+
+        # use - math.sin(angle_radians) so that the points appear in a clockwise direction
+        point_list[i].y = center + radius * - math.sin(angle_radians)
     return point_list
 
 window = window_configu()
 turtle.hideturtle()
 pen = turtle.Turtle()
 pen.penup()
-##test
+pen.speed(999999999)
 point_list = Point_axes(Create_Point_List())
+pen.color(point_list[0].color)
 for p in point_list:
     Point.Draw_Point(p)
-
-##test
 
 turtle.penup()
 turtle.done()
