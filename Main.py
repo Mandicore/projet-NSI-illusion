@@ -1,7 +1,10 @@
+#Project created by HEQUET Romain and FIGUEIRAS Jossua in 2023
 import turtle
 import math
+import time
 
 NB_POINT = 12
+background_color = "gray"
 
 class Point:
     def __init__(self, dot, color, x = None, y = None):
@@ -10,14 +13,21 @@ class Point:
         self.x = x
         self.y = y
     
-    def Draw_Point(Point):
-        pen.goto(Point.x, Point.y)
-        pen.dot(Point.dot)
+    def Draw_Point(point):
+        pen.color(point.color)
+        pen.goto(point.x, point.y)
+        pen.dot(point.dot)
 
 def window_configu():
     window = turtle.Screen()
     window.title("Chargement")
-    window.bgcolor("#555")
+    window.bgcolor(background_color)
+    #defind window size
+    window.setup(width=900, height=600) 
+    #get information of Tkinter window (top level =  principal window)
+    root = window.getcanvas().winfo_toplevel()
+    #it's impossible to resise windows on x and y axes
+    root.resizable(False, False)
     return window
 
 def Create_Point_List():
@@ -30,10 +40,9 @@ def Create_Point_List():
 def Point_axes(point_list):
     """def point position of all point of point_list"""
     radius = 150
+    #center of the circle
     center = 0
-
     angle_step = 360 / NB_POINT
-
     for i in range(NB_POINT):
         angle_degrees = i * angle_step
         angle_radians = math.radians(angle_degrees)
@@ -43,16 +52,41 @@ def Point_axes(point_list):
         point_list[i].y = center + radius * - math.sin(angle_radians)
     return point_list
 
+def Create_Cross():
+        """Create the cross in the middle of window"""
+        pen.penup()
+        pen.width(3)
+        pen.goto(-8, 0)
+        pen.pendown() 
+        pen.goto(8, 0)
+        pen.penup()
+        pen.goto(0, -8)
+        pen.pendown()
+        pen.goto(0, 8)
+
+def Animation_Point(list_point):
+    base_color = list_point[1].color
+    while (True):
+        for point in list_point:
+            point.color = background_color
+            Point.Draw_Point(point)
+            time.sleep(0.10)
+            point.color = base_color
+            Point.Draw_Point(point)
+
+
+
 window = window_configu()
-turtle.hideturtle()
+
 pen = turtle.Turtle()
+pen.hideturtle()
+pen.speed("fastest")
+Create_Cross()
 pen.penup()
-pen.speed(999999999)
 point_list = Point_axes(Create_Point_List())
-pen.color(point_list[0].color)
 for p in point_list:
     Point.Draw_Point(p)
-
+Animation_Point(point_list)
 turtle.penup()
 turtle.done()
 
