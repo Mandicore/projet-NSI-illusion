@@ -4,8 +4,6 @@ import math
 import time
 
 NB_POINT = 12
-background_color = "gray"
-
 class Point:
     def __init__(self, dot, color, x = None, y = None):
         self.dot = dot
@@ -20,8 +18,8 @@ class Point:
 
 def window_configu():
     window = turtle.Screen()
-    window.title("Chargement")
-    window.bgcolor(background_color)
+    window.title("Illusion par Romain et Jossua")
+    window.bgcolor("grey")
     #defind window size
     window.setup(width=900, height=600) 
     #get information of Tkinter window (top level =  principal window)
@@ -34,7 +32,7 @@ def Create_Point_List():
     """Create a point list without value for x and y"""
     point_list = []
     for i in range(NB_POINT):
-        point_list.append(Point(50, "red"))
+        point_list.append(Point(50, "magenta"))
     return point_list
 
 def Point_axes(point_list):
@@ -68,16 +66,14 @@ def Animation_Point(list_point):
     base_color = list_point[1].color
     while (True):
         for point in list_point:
-            point.color = background_color
+            point.color = window.bgcolor()
             Point.Draw_Point(point)
-            time.sleep(0.10)
             point.color = base_color
             Point.Draw_Point(point)
 
 
 
 window = window_configu()
-
 pen = turtle.Turtle()
 pen.hideturtle()
 pen.speed("fastest")
