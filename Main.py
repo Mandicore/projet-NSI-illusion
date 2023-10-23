@@ -1,22 +1,24 @@
 #Project created by HEQUET Romain and FIGUEIRAS Jossua in 2023
 import turtle
 import math
-import time
 
 NB_POINT = 12
 class Point:
     def __init__(self, dot, color, x = None, y = None):
+        """def the object point"""
         self.dot = dot
         self.color = color
         self.x = x
         self.y = y
     
     def Draw_Point(point):
+        """Print the point on turtle window"""
         pen.color(point.color)
         pen.goto(point.x, point.y)
         pen.dot(point.dot)
 
 def window_configu():
+    """Set window settings"""
     window = turtle.Screen()
     window.title("Illusion par Romain et Jossua")
     window.bgcolor("grey")
@@ -45,7 +47,6 @@ def Point_axes(point_list):
         angle_degrees = i * angle_step
         angle_radians = math.radians(angle_degrees)
         point_list[i].x = center + radius * math.cos(angle_radians)
-
         # use - math.sin(angle_radians) so that the points appear in a clockwise direction
         point_list[i].y = center + radius * - math.sin(angle_radians)
     return point_list
@@ -53,6 +54,7 @@ def Point_axes(point_list):
 def Create_Cross():
         """Create the cross in the middle of window"""
         pen.penup()
+        #change the pen size
         pen.width(3)
         pen.goto(-8, 0)
         pen.pendown() 
@@ -62,7 +64,10 @@ def Create_Cross():
         pen.pendown()
         pen.goto(0, 8)
 
+
 def Animation_Point(list_point):
+    """Print a point with same color as the background, then redo a point of the 
+    color of the other points in the list to create the animation"""
     base_color = list_point[1].color
     while (True):
         for point in list_point:
@@ -70,8 +75,6 @@ def Animation_Point(list_point):
             Point.Draw_Point(point)
             point.color = base_color
             Point.Draw_Point(point)
-
-
 
 window = window_configu()
 pen = turtle.Turtle()
@@ -83,6 +86,5 @@ point_list = Point_axes(Create_Point_List())
 for p in point_list:
     Point.Draw_Point(p)
 Animation_Point(point_list)
-turtle.penup()
 turtle.done()
 
