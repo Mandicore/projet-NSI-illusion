@@ -22,7 +22,7 @@ class Point:
 def window_configu():
     """donne les paramètre à la fen^tre"""
     window = turtle.Screen()
-    window.title("Illusion par Romain et Jossua")
+    window.title("Illusion par Romain, Wiliam et Jossua")
     window.bgcolor("grey")
     #def la taille de la fenêtre
     window.setup(width=900, height=600) 
@@ -54,7 +54,7 @@ def Point_axes(point_list):
         point_list[i].y = center + radius * - math.sin(angle_radians)
     return point_list
 
-def Create_Cross():
+def Create_Cross(pen):
         """Crée la croix au centre de la fenêtre"""
         pen.penup()
         #change la taille de pen
@@ -87,12 +87,12 @@ def pen_settings():
     return pen
 
 window = window_configu()
-pen = pen_settings
-Create_Cross()
+pen = pen_settings()
+Create_Cross(pen)
 pen.penup()
 point_list = Point_axes(Create_Point_List())
 for p in point_list:
     Point.Draw_Point(p)
-sleep(1)
+sleep(0.250)
 Animation_Point(point_list)
 turtle.done()
