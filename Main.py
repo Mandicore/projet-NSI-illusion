@@ -23,7 +23,7 @@ def window_configu():
     """donne les paramètre à la fen^tre"""
     window = turtle.Screen()
     window.title("Illusion par Romain, Wiliam et Jossua")
-    window.bgcolor("grey")
+    window.bgcolor("#b2b2b2")
     #def la taille de la fenêtre
     window.setup(width=900, height=600) 
     #récupérer les informations de la fenêtre au premier plan (la seul ici)
